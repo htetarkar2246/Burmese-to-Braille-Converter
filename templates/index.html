@@ -65,7 +65,9 @@
         border: 1px solid #ddd;
         border-radius: 10px;
         white-space: pre-wrap;
-        font-size: 1rem;
+        font-family: monospace;
+        font-size: 14.5px; /* ~3.8mm font */
+        line-height: 2.4;
         height: 200px;
         overflow-y: auto;
         margin-top: 1rem;
@@ -105,6 +107,21 @@
       #downloadLink:hover {
         background: #16a085;
       }
+
+      #removeFile {
+        padding: 10px;
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-bottom: 1.2rem;
+      }
+
+      #removeFile:hover {
+        background: #c0392b;
+      }
     </style>
   </head>
   <body>
@@ -119,7 +136,8 @@
         ></textarea>
 
         <label>Or Upload a File (PDF, DOCX, TXT):</label>
-        <input type="file" name="file" />
+        <input type="file" name="file" id="fileInput" />
+        <button type="button" id="removeFile">Remove</button>
 
         <button type="submit">Convert</button>
       </form>
@@ -139,6 +157,12 @@
       const form = document.getElementById("convertForm");
       const output = document.getElementById("brailleOutput");
       const downloadLink = document.getElementById("downloadLink");
+      const fileInput = document.getElementById("fileInput");
+      const removeFile = document.getElementById("removeFile");
+
+      removeFile.addEventListener("click", () => {
+        fileInput.value = "";
+      });
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
