@@ -6,6 +6,7 @@ import base64
 from docx import Document
 from docx.shared import Pt
 from docx.shared import Pt
+import os
 
 app = Flask(__name__)
 
@@ -69,5 +70,7 @@ def convert():
 
     return jsonify({"braille": braille_text, "docx": encoded_docx})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
